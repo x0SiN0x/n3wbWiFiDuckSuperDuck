@@ -1,1 +1,1 @@
-// DuckyParser logic
+// DuckyParser implementation

@@ -1,1 +1,1 @@
-// LayoutManager logic
+// LayoutManager implementation

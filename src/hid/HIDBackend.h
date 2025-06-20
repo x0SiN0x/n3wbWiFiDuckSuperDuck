@@ -1,0 +1,1 @@
+// HIDBackend stub

@@ -1,1 +1,1 @@
-// DuckyCommand logic
+// DuckyCommand implementation

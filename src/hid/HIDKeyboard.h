@@ -1,1 +1,1 @@
-// HIDKeyboard header
+// HIDKeyboard header stub

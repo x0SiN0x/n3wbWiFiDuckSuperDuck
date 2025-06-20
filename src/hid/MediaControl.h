@@ -1,1 +1,1 @@
-// MediaControl header
+// MediaControl header stub

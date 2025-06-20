@@ -1,1 +1,3 @@
-// Main entry point
+#include "duckyscript/DuckyInterpreter.h"
+void setup() {}
+void loop() {}

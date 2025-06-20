@@ -1,1 +1,1 @@
-// HIDKeyboard logic
+// HIDKeyboard implementation

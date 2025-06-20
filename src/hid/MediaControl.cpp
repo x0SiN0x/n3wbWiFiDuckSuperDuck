@@ -1,1 +1,1 @@
-// MediaControl logic
+// MediaControl implementation

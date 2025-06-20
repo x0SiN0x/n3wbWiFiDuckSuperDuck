@@ -1,1 +1,1 @@
-// DuckyInterpreter logic
+// DuckyInterpreter implementation

@@ -1,1 +1,1 @@
-// DuckyRuntime logic
+// DuckyRuntime implementation
