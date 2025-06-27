@@ -1,15 +1,12 @@
-// Command string to opcode mapping
 #include "parser.hpp"
 
 DuckyOpcode getOpcodeForLine(const String& line) {
     String cmd = line;
     int spaceIdx = cmd.indexOf(' ');
-    if (spaceIdx > 0) {
-        cmd = cmd.substring(0, spaceIdx);
-    }
-
+    if (spaceIdx > 0) cmd = cmd.substring(0, spaceIdx);
     cmd.toUpperCase();
 
+    if (cmd == "ATTACKMODE") return OP_ATTACKMODE;
     if (cmd == "REM") return OP_REM;
     if (cmd == "STRING") return OP_STRING;
     if (cmd == "STRINGLN") return OP_STRINGLN;
