@@ -1,0 +1,2 @@
+// USB descriptors
+#pragma once

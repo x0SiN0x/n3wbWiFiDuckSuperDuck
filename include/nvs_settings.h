@@ -1,0 +1,2 @@
+// NVS settings
+#pragma once

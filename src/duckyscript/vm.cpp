@@ -1,0 +1,1 @@
+// DuckyScript VM stub

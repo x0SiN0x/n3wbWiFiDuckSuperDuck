@@ -1,0 +1,1 @@
+// DuckyScript parser stub
