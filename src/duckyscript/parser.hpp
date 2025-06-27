@@ -11,18 +11,28 @@ enum DuckyScriptVersion {
 enum DuckyOpcode {
     OP_REM,
     OP_STRING,
+    OP_STRINGLN,
     OP_DELAY,
+    OP_DEFAULT_DELAY,
+    OP_DEFAULT_CHAR_DELAY,
+    OP_KEY_PRESS_DELAY,
+    OP_REPEAT,
+    OP_LOAD_PNG,
+    OP_LOAD_JPG,
+    OP_WAIT_FOR_BUTTON_PRESS,
+    OP_LED_OFF,
+    OP_LED_R,
+    OP_LED_G,
+    OP_LED_B,
+    OP_STOP_PAYLOAD,
+    OP_RESET,
     OP_UNKNOWN
 };
 
-// Parsed instruction structure
 struct Instruction {
     DuckyOpcode opcode;
     String argument;
 };
 
-// Global script version (set per file)
 extern DuckyScriptVersion currentVersion;
-
-// Parse a single line into opcode + argument
 Instruction parseLine(const String& line);
