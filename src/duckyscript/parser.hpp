@@ -26,6 +26,7 @@ enum DuckyOpcode {
     OP_LED_B,
     OP_STOP_PAYLOAD,
     OP_RESET,
+    OP_SET_LAYOUT,
     OP_UNKNOWN
 };
 

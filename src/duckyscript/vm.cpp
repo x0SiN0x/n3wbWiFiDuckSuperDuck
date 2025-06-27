@@ -1,17 +1,16 @@
+// VM executor with SET_LAYOUT support
 #include "parser.hpp"
 #include "vm.hpp"
+#include "layout_manager.hpp"
 #include <Arduino.h>
 
-// Runtime delay configuration
 int defaultDelayMs = 0;
 int keyPressDelayMs = 5;
 int defaultCharDelayMs = 0;
 
 void executeInstruction(const Instruction& instr) {
     switch (instr.opcode) {
-        case OP_REM:
-            // Ignore comment
-            break;
+        case OP_REM: break;
 
         case OP_STRING:
             Serial.print("Typing: ");
@@ -23,9 +22,7 @@ void executeInstruction(const Instruction& instr) {
             break;
 
         case OP_STRINGLN:
-            Serial.print("Typing + Enter: ");
-            Serial.println(instr.argument);
-            // Append ENTER press here
+            Serial.println(instr.argument + "\n");
             break;
 
         case OP_DELAY:
@@ -45,35 +42,36 @@ void executeInstruction(const Instruction& instr) {
             break;
 
         case OP_REPEAT:
-            Serial.print("Repeat: not implemented in VM yet
-");
+            Serial.println("Repeat (handled in runner).");
             break;
 
         case OP_LOAD_PNG:
         case OP_LOAD_JPG:
-            Serial.printf("Display image: %s
-", instr.argument.c_str());
+            Serial.printf("Display image: %s\n", instr.argument.c_str());
             break;
 
         case OP_WAIT_FOR_BUTTON_PRESS:
-            Serial.println("Waiting for button (stub)...");
+            Serial.println("Waiting for button (stub).");
             break;
 
         case OP_LED_OFF:
         case OP_LED_R:
         case OP_LED_G:
         case OP_LED_B:
-            Serial.printf("LED control command: %d
-", instr.opcode);
+            Serial.printf("LED: %d\n", instr.opcode);
             break;
 
         case OP_STOP_PAYLOAD:
-            Serial.println("Payload stopped.");
+            Serial.println("Stopping payload.");
             break;
 
         case OP_RESET:
-            Serial.println("Rebooting...");
+            Serial.println("Resetting...");
             ESP.restart();
+            break;
+
+        case OP_SET_LAYOUT:
+            setKeyboardLayout(instr.argument);
             break;
 
         default:

@@ -27,6 +27,7 @@ DuckyOpcode getOpcodeForLine(const String& line) {
     if (cmd == "LED_B") return OP_LED_B;
     if (cmd == "STOP_PAYLOAD") return OP_STOP_PAYLOAD;
     if (cmd == "RESET") return OP_RESET;
+    if (cmd == "SET_LAYOUT") return OP_SET_LAYOUT;
 
     return OP_UNKNOWN;
 }
