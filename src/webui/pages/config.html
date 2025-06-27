@@ -1,1 +1,40 @@
-<!-- Config UI -->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Device Config</title>
+  <style>
+    body {
+      background-color: #121212;
+      color: #eee;
+      font-family: sans-serif;
+      padding: 20px;
+    }
+    label, input, select {
+      display: block;
+      margin: 8px 0;
+    }
+  </style>
+</head>
+<body>
+  <h2>Device Configuration</h2>
+  <form id="configForm">
+    <label>Keyboard Layout:
+      <select name="layout">
+        <option>US</option>
+        <option>UK</option>
+        <option>DE</option>
+        <option>FR</option>
+      </select>
+    </label>
+    <label>Default Delay (ms): <input type="number" name="default_delay" value="5" /></label>
+    <label>Char Delay (ms): <input type="number" name="char_delay" value="0" /></label>
+    <label>Key Press Delay: <input type="number" name="key_press_delay" value="5" /></label>
+    <label>USB VID: <input type="text" name="vid" value="0x1337" /></label>
+    <label>USB PID: <input type="text" name="pid" value="0x0001" /></label>
+    <label>WiFi SSID: <input type="text" name="ssid" value="n3wbduck" /></label>
+    <label>Password: <input type="password" name="password" value="password" /></label>
+    <button type="submit">Save</button>
+  </form>
+</body>
+</html>
