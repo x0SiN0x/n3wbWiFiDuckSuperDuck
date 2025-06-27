@@ -1,1 +1,1 @@
-// DuckyScript commands
+// Core instruction implementations

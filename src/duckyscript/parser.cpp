@@ -1,1 +1,1 @@
-// DuckyScript parser stub
+// DuckyScript parser implementation

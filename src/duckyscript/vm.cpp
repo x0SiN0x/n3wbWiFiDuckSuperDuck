@@ -1,1 +1,1 @@
-// DuckyScript VM stub
+// Virtual machine to execute parsed commands
