@@ -1,2 +1,2 @@
-#include "LGFX_Config.hpp"
+#include "display/LGFX_Config.hpp"
 LGFX tft;
