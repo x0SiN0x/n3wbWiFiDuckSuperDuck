@@ -1,4 +1,6 @@
 #include "webui_api_backend.hpp"
+#include "usb/usb_hid_keyboard.hpp"
+#include "usb/usb_hid_mouse.hpp"
 
 #include <Arduino.h>
 #include <AsyncTCP.h>
