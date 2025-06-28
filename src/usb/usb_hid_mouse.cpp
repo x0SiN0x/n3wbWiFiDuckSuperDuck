@@ -4,5 +4,5 @@
 #include "tusb.h"
 
 void moveMouse(int x, int y, int wheel) {
-    tud_hid_mouse_report(0, 0, x, y, wheel);
+    tud_hid_mouse_report(0, 0, x, y, wheel, 0);  // vertical = wheel, horizontal = 0
 }
