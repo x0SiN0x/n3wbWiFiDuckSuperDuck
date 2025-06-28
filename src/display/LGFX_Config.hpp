@@ -11,15 +11,15 @@ public:
             cfg.pin_sclk = DISPLAY_SCLK;
             cfg.pin_mosi = DISPLAY_MOSI;
             cfg.pin_miso = DISPLAY_MISO;
-            cfg.pin_cs = DISPLAY_CS;
+            // cfg.pin_cs removed for LovyanGFX v1.x compatibility
             bus->config(cfg);
         }
-        this->setBus(bus);
+        this->setBus(&bus);
 
         auto panel = new lgfx::Panel_ST7735S();
         {
             auto cfg = panel->config();
-            cfg.pin_cs = DISPLAY_CS;
+            // cfg.pin_cs removed for LovyanGFX v1.x compatibility
             cfg.pin_rst = DISPLAY_RST;
             cfg.pin_busy = DISPLAY_BUSY;
             cfg.memory_width = DISPLAY_WIDTH;
