@@ -13,12 +13,12 @@ void draw_image(LGFX& tft, const char* path) {
     }
 
     String file = String(path);
-    fs::FS* fs = file.startsWith("/sd/") ? &SD : &SPIFFS;
+    fs::FS &fs = file.startsWith("/sd/") ? (fs::FS &)SD : (fs::FS &)SPIFFS;
     String shortPath = file.startsWith("/sd/") ? file.substring(3) : file;
 
     if (file.endsWith(".png")) {
-        tft.drawPngFile(*fs, shortPath.c_str());
+        tft.drawPngFile(fs, shortPath.c_str());
     } else if (file.endsWith(".jpg") || file.endsWith(".jpeg")) {
-        tft.drawJpgFile(*fs, shortPath.c_str());
+        tft.drawJpgFile(fs, shortPath.c_str());
     }
 }
