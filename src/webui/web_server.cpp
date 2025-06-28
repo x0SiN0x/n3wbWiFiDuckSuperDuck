@@ -14,7 +14,7 @@ void start_web_server() {
   }
 
 
-  init_api_routes(server);
+  setupWebAPI();
   init_live_routes(server);
 
   server.on("/", HTTP_GET, [](AsyncWebServerRequest *req) {
