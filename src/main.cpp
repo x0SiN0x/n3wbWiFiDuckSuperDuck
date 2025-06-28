@@ -11,6 +11,11 @@ void setup() {
   delay(500);
 
   // Init LittleFS
+  extern LGFX tft;
+  tft.init();
+  tft.setBrightness(255);
+  tft.fillScreen(TFT_RED); // TEMP: test panel response
+  delay(1000);
   if (!LittleFS.begin(true)) {
     Serial.println("❌ Failed to mount LittleFS");
     return;
