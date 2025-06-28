@@ -1,9 +1,7 @@
 #pragma once
+#include <Arduino.h>
 
-class LayoutManager {
-public:
-  void setLayout(const String &layout);
-  String getCurrentLayout();
-};
+bool setKeyboardLayout(const String& layout);
+String getKeyboardLayout();
 
 extern LayoutManager layout_manager;
