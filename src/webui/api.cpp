@@ -4,7 +4,6 @@
 #include "../duckyscript/layout_manager.hpp"
 
 extern bool isPayloadRunning;
-extern LayoutManager layout_manager;
 
 String getKeyboardLayout() {
   return layout_manager.getCurrentLayout();
