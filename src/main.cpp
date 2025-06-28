@@ -1,5 +1,5 @@
 #include <Arduino.h>
-#include "display.hpp"      // ✅ Fix: ensures showIdleScreen() is declared
+#include "display/display.hpp"      // ✅ Fix: ensures showIdleScreen() is declared
 #include "display/LGFX_Config.hpp"
 
 extern LGFX tft;
