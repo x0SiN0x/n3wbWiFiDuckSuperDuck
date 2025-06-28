@@ -75,7 +75,7 @@ public:
     // Enable backlight if defined
     if (DISPLAY_LEDA >= 0) {
       pinMode(DISPLAY_LEDA, OUTPUT);
-      digitalWrite(DISPLAY_LEDA, HIGH);
+      digitalWrite(DISPLAY_LEDA, LOW);
     }
   }
 };
