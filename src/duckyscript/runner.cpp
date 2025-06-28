@@ -1,3 +1,4 @@
+#include "display.hpp"
 // Script runner: reads a script line by line, parses, and executes
 #include "runner.hpp"
 #include "parser.hpp"

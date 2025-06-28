@@ -8,6 +8,7 @@ void setup() {
   extern LGFX tft;
   tft.init();
   tft.setBrightness(255);
+  showIdleScreen();
   tft.fillScreen(TFT_RED); // TEMP: test panel response
   delay(1000);
 }
