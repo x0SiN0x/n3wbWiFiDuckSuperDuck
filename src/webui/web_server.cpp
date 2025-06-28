@@ -3,8 +3,7 @@
 #include <ESPAsyncWebServer.h>
 #include "api.hpp"
 #include "api_live.hpp"
-
-AsyncWebServer server(80);
+#include "webui_api_backend.hpp"
 
 void start_web_server() {
   if (!SPIFFS.begin(true)) {

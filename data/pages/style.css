@@ -1,0 +1,76 @@
+
+body {
+  margin: 0;
+  font-family: 'Courier New', monospace;
+  background-color: #0e0e0e;
+  color: #e0e0e0;
+}
+nav#topnav {
+  display: flex;
+  justify-content: space-between;
+  background-color: #1f1f1f;
+  padding: 10px;
+}
+nav#topnav h1 {
+  font-size: 1.2rem;
+  color: #76c2af;
+}
+nav#topnav ul {
+  list-style: none;
+  display: flex;
+  gap: 15px;
+  padding: 0;
+  margin: 0;
+}
+nav#topnav ul li a {
+  color: #e0e0e0;
+  text-decoration: none;
+}
+section {
+  margin: 20px;
+}
+#status-display img {
+  max-width: 100%;
+  border-radius: 8px;
+}
+.hidden {
+  display: none;
+}
+#editor {
+  height: 300px;
+  background-color: #111;
+  border: 1px solid #444;
+  padding: 10px;
+}
+.buttons {
+  margin-top: 10px;
+}
+button {
+  background-color: #76c2af;
+  border: none;
+  padding: 10px 20px;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+
+#live-keyboard, #live-mouse {
+  margin: 20px 0;
+}
+.keyboard-row, .mouse-grid {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 10px 0;
+}
+.keyboard-row button, .mouse-grid button {
+  padding: 12px 18px;
+  font-size: 1rem;
+  background-color: #222;
+  color: #76c2af;
+  border: 1px solid #444;
+  border-radius: 5px;
+  cursor: pointer;
+}

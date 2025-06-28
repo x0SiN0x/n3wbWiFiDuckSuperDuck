@@ -1,22 +1,43 @@
 <!DOCTYPE html>
-<html><body>
-  <h3>Keyboard Layout</h3>
-  <select id="layout">
-    <option value="US">US</option>
-    <option value="UK">UK</option>
-    <option value="DE">DE</option>
-    <option value="FR">FR</option>
-  </select>
-  <button onclick="saveLayout()">Save</button>
+<html>
+<head>
+  <title>n3wbDucky - Config</title>
+  <script src="/pages/petite-vue.js" defer init></script>
+  <style>
+    body { background: #111; color: #0f0; font-family: monospace; padding: 1em; text-align: center; }
+    select, button { background: #222; color: #0f0; border: 1px solid #0f0; padding: 0.5em; font-family: monospace; }
+  </style>
+</head>
+<body>
+  <div v-scope="App">
+    <h2>Keyboard Layout</h2>
+    <select v-model="layout">
+      <option value="US">US</option>
+      <option value="UK">UK</option>
+      <option value="DE">DE</option>
+      <option value="FR">FR</option>
+    </select>
+    <br><br>
+    <button @click="save">Save Layout</button>
+    <div style="margin-top:1em;">Current: {{ layout }}</div>
+  </div>
   <script>
-    async function saveLayout() {
-      const layout = document.getElementById('layout').value;
-      await fetch('/config', {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({layout})
-      });
-      alert('Saved');
-    }
+    const App = {
+      layout: "US",
+      async mounted() {
+        const res = await fetch("/config");
+        const cfg = await res.json();
+        this.layout = cfg.layout;
+      },
+      save() {
+        fetch("/config", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ layout: this.layout })
+        }).then(() => alert("Saved"));
+      }
+    };
+    window.App = App;
   </script>
-</body></html>
+</body>
+</html>

@@ -1,1 +1,110 @@
-<!-- Finalized main.html with editor -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>n3wbWiFiDuckSuperDuck</title>
+  <link rel="stylesheet" href="style.css" />
+  <script type="module" src="editor.js"></script>
+  <script defer src="main.js"></script>
+</head>
+<body>
+  <nav id="topnav">
+    <h1>n3wbWiFiDuckSuperDuck</h1>
+    <ul>
+      <li><a href="#" id="nav-main">Main</a></li>
+      <li><a href="#" id="nav-live">Live</a></li>
+      <li><a href="#" id="nav-config">Config</a></li>
+      <li><a href="#" id="nav-about">About</a></li>
+    </ul>
+  </nav>
+
+  <main id="main-view">
+    <section id="status-display">
+      <img id="status-img" src="/assets/n3wb_main.png" alt="Status Image" />
+    </section>
+
+    <section id="metrics">
+      <h2>System Status</h2>
+      <ul>
+        <li>CPU Load: <span id="cpu-load">--</span>%</li>
+        <li>Free RAM: <span id="free-ram">--</span> KB</li>
+        <li>Disk Usage: <span id="disk-usage">--</span></li>
+      </ul>
+    </section>
+
+    <section id="payloads">
+      <h2>Payloads</h2>
+      <ul id="payload-list"></ul>
+    </section>
+
+    <section id="editor-section">
+      <h2>Payload Editor</h2>
+      <div id="editor"></div>
+      <div class="buttons">
+        <button id="run-btn">Run</button>
+        <button id="save-btn">Save</button>
+        <button id="delete-btn">Delete</button>
+      </div>
+    </section>
+  </main>
+
+  
+  <main id="live-view" class="hidden">
+    <h2>Live Interaction</h2>
+    <section id="live-keyboard">
+      <h3>Keyboard</h3>
+      <div class="keyboard-row">
+        <button data-key="ESC">ESC</button>
+        <button data-key="CTRL">CTRL</button>
+        <button data-key="ALT">ALT</button>
+        <button data-key="DEL">DEL</button>
+        <button data-key="ENTER">ENTER</button>
+      </div>
+      <div class="keyboard-row">
+        <button data-key="A">A</button>
+        <button data-key="S">S</button>
+        <button data-key="D">D</button>
+        <button data-key="W">W</button>
+      </div>
+    </section>
+
+    <section id="live-mouse">
+      <h3>Mouse</h3>
+      <div class="mouse-grid">
+        <button data-move="up">↑</button><br/>
+        <button data-move="left">←</button>
+        <button data-move="click">●</button>
+        <button data-move="right">→</button><br/>
+        <button data-move="down">↓</button>
+      </div>
+    </section>
+  </main>
+
+  <main id="config-view" class="hidden">
+    <h2>Configuration</h2>
+    <form id="config-form">
+      <label for="key-delay">Key Press Delay (ms)</label>
+      <input type="number" id="key-delay" name="key-delay" min="1" max="32767" />
+
+      <label for="default-delay">Default Delay (ms)</label>
+      <input type="number" id="default-delay" name="default-delay" min="1" max="32767" />
+
+      <label for="layout">Keyboard Layout</label>
+      <select id="layout" name="layout">
+        <option value="US">US</option>
+        <option value="UK">UK</option>
+        <option value="DE">DE</option>
+      </select>
+
+      <button type="submit">Save Config</button>
+    </form>
+  </main>
+
+  <main id="about-view" class="hidden">
+    <h2>About</h2>
+    <p>n3wbWiFiDuckSuperDuck is an open-source payload launcher supporting full DuckyScript v1/v2/v3 and v3+ extensions.</p>
+    <p>See <a href="https://docs.hak5.org/hak5-usb-rubber-ducky/duckyscript-quick-reference/" target="_blank">DuckyScript Docs</a> for syntax.</p>
+  </main>
+</body>
+</html>

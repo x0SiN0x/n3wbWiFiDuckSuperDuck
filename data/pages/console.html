@@ -1,15 +1,29 @@
 <!DOCTYPE html>
 <html>
-<head><title>Console Log</title></head>
-<body style="background:black; color:lime; font-family:monospace;">
-<h2>Live Console Log</h2>
-<pre id="log" style="white-space: pre-wrap; word-wrap: break-word; height: 90vh; overflow-y: scroll; padding: 1em; border: 1px solid gray;"></pre>
-<script>
-setInterval(async () => {
-  const res = await fetch("/log");
-  const text = await res.text();
-  document.getElementById("log").textContent = text;
-}, 1000);
-</script>
+<head>
+  <title>n3wbDucky - Console</title>
+  <script src="/pages/petite-vue.js" defer init></script>
+  <style>
+    body { background: #111; color: #0f0; font-family: monospace; padding: 1em; }
+    pre { background: #000; color: #0f0; border: 1px solid #0f0; padding: 1em; height: 90vh; overflow-y: scroll; }
+  </style>
+</head>
+<body>
+  <div v-scope="App">
+    <h2>Console Log</h2>
+    <pre id="log">{{ log }}</pre>
+  </div>
+  <script>
+    const App = {
+      log: '',
+      mounted() {
+        setInterval(async () => {
+          const res = await fetch("/log");
+          this.log = await res.text();
+        }, 1000);
+      }
+    };
+    window.App = App;
+  </script>
 </body>
 </html>

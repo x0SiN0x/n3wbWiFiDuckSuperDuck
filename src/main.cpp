@@ -1,49 +1,39 @@
 #include <Arduino.h>
 #include <WiFi.h>
-#include "webui/web_server.hpp"
-#include "display/LGFX_Config.hpp"
-#include "display/image_builtin.hpp"
-#include "webui/api_log.hpp"
-#include "esp_task_wdt.h"
+#include <SPIFFS.h>
+#include <ESPAsyncWebServer.h>
+#include "webui/webui_api_backend.hpp"
 
-extern LGFX tft;
+AsyncWebServer server(80);
 
 void setup() {
-  // Correct WDT config for ESP-IDF 5+
-  esp_task_wdt_config_t wdt_config = {
-    .timeout_ms = 10000,  // 10 seconds
-    .idle_core_mask = (1 << portNUM_PROCESSORS) - 1,
-    .trigger_panic = false
-  };
-  if (esp_task_wdt_status(NULL) == ESP_ERR_NOT_FOUND) {
-    esp_task_wdt_init(&wdt_config);
-  }
-  esp_task_wdt_add(NULL);  // register current task
-
   Serial.begin(115200);
-  delay(1000);
-  Serial.println("[BOOT] Setup() started");
-  logln("[BOOT] Setup() started");
+  delay(500);
 
-  tft.init();
-  tft.setRotation(1);
-  tft.fillScreen(TFT_BLACK);
-  draw_builtin_image(false);  // show embedded splash
-  logln("[DISPLAY] Built-in splash loaded");
+  // Init SPIFFS
+  if (!SPIFFS.begin(true)) {
+    Serial.println("❌ Failed to mount SPIFFS");
+    return;
+  }
+  Serial.println("✅ SPIFFS mounted");
 
+  // Connect to WiFi AP mode
   WiFi.softAP(OPT_WIFI_SSID, OPT_WIFI_PASS);
-  Serial.printf("[WIFI] Access Point started: %s / %s\n", OPT_WIFI_SSID, OPT_WIFI_PASS);
-  logln(String("[WIFI] Access Point started: ") + OPT_WIFI_SSID);
+  Serial.println("📡 Access Point Started");
+  Serial.print("IP Address: ");
+  Serial.println(WiFi.softAPIP());
 
-  start_web_server();
-  logln("[WEB] Web server started");
+  // Mount static files (HTML, JS, CSS)
+  server.serveStatic("/", SPIFFS, "/").setDefaultFile("index.html");
 
-  tft.setTextSize(2);
-  tft.setTextColor(TFT_RED);
-  tft.drawString("TEST SCREEN", 10, 30);
+  // Setup JSON API endpoints
+  setupWebAPI();
+
+  // Start server
+  server.begin();
+  Serial.println("🌐 Web server started");
 }
 
 void loop() {
-  esp_task_wdt_reset();
-  delay(100);
+  // No loop logic for now
 }
