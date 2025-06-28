@@ -1,10 +1,10 @@
 
 #include "display.hpp"
-#include "n3wb_main_img.hpp"
-#include "n3wb_main_evil_img.hpp"
+#include "images/n3wb_main_img.hpp"
+#include "images/n3wb_main_evil_img.hpp"
 #include <Arduino.h>
 
-// Mock drawing method for TFT (you should replace with real drawing call)
+// Placeholder for the actual draw function connected to TFT
 extern void drawRGB565Image(const uint16_t *img, int width, int height);
 
 enum DisplayState {
