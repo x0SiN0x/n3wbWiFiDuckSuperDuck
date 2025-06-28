@@ -1,7 +1,5 @@
 
 #include "display/display.hpp"
-#include "images/boot_normal_img.hpp"
-#include "images/boot_evil_img.hpp"
 #include "images/image_manager.cpp"
 
 #include <Arduino.h>
@@ -12,7 +10,7 @@
 
 static DisplayState current_state = DISPLAY_IDLE;
 
-void drawBootImage(DisplayState state) {
+void drawImage(DisplayState state) {
     const char* filename_jpg = (state == DISPLAY_IDLE) ? "/boot_idle.jpg" : "/boot_evil.jpg";
     const char* filename_png = (state == DISPLAY_IDLE) ? "/boot_idle.png" : "/boot_evil.png";
 
@@ -54,16 +52,21 @@ void drawBootImage(DisplayState state) {
         }
     }
 
+    // Nothing defined, must be our default built in image
+
+    // center our image
+    int x = (tft.width() - DISPLAY_WIDTH) / 2;
+    int y = (tft.height() - DISPLAY_HEIGHT) / 2;
     if (state == DISPLAY_IDLE) {
-        tft.drawPng(boot_normal_img, boot_normal_img_len, 0, 0);
+        tft.drawJpg(boot_normal_img, boot_normal_img_len, x, y, DISPLAY_WIDTH, DISPLAY_HEIGHT);
     } else {
-        tft.drawPng(boot_evil_img, boot_evil_img_len, 0, 0);
+        tft.drawJpg(boot_evil_img, boot_evil_img_len, x, y, DISPLAY_WIDTH, DISPLAY_HEIGHT);
     }
 }
 
 void updateDisplay(DisplayState state) {
     current_state = state;
-    drawBootImage(state);
+    drawImage(state);
 }
 
 void showIdleScreen() {

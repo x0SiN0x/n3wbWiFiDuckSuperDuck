@@ -1,14 +1,22 @@
 #include <Arduino.h>
-#include "display/display.hpp"      // ✅ Fix: ensures showIdleScreen() is declared
+
+#ifdef HAS_TFT
+#include "display/display.hpp"
 #include "display/LGFX_Config.hpp"
+#endif
 
 extern LGFX tft;
 
 void setup() {
   Serial.begin(115200);
-  tft.begin();              // ✅ Preferred over tft.init() for full panel init
+
+  // set up our Display if it exists
+#ifdef HAS_TFT
+  tft.begin();
   tft.setBrightness(255);
-  showIdleScreen();         // ✅ Show boot image
+  showIdleScreen();
+#endif
+
 }
 
 void loop() {
