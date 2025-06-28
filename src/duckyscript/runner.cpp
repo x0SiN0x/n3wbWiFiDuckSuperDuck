@@ -1,4 +1,4 @@
-#include "display/display.hpp"
+#include "display.hpp"
 #include "runner.hpp"
 #include "parser.hpp"
 #include "vm.hpp"
