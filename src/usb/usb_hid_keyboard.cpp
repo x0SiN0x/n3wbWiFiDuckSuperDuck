@@ -12,5 +12,15 @@ void send_hid_key(const char* key) {
 
 
 void send_hid_string(const char* str) {
+void injectString(const std::string& text) {
+    for (char c : text) {
+        if (c == '\n') {
+            sendKey(KEY_ENTER);
+        } else {
+            sendKey(c);
+        }
+        delay(5); // Respect default key delay
+    }
+}
   // TODO: implement string injection
 }

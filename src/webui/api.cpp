@@ -23,7 +23,7 @@ void init_api_routes(AsyncWebServer &server) {
 
   server.on("/config", HTTP_POST, [](AsyncWebServerRequest *req) {}, NULL,
     [](AsyncWebServerRequest *req, uint8_t *data, size_t len, size_t, size_t) {
-      String json = String((char*)data);
+      String json = String((const char*)data, len);
       int start = json.indexOf(":") + 2;
       int end = json.lastIndexOf("\"");
       String layout = json.substring(start, end);

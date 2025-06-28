@@ -68,6 +68,7 @@ void setupWebAPI() {
       DeserializationError err = deserializeJson(doc, data);
       if (!err && doc.containsKey("key")) {
         String key = doc["key"].as<String>();
+    sendKey(KEY_ENTER); // Dummy key
         // TODO: call sendKey(key); implement real HID logic
         Serial.printf("[HID] Key: %s\n", key.c_str());
       }
@@ -83,6 +84,7 @@ void setupWebAPI() {
       DeserializationError err = deserializeJson(doc, data);
       if (!err && doc.containsKey("action")) {
         String action = doc["action"].as<String>();
+    moveMouse(10, 10, 0); // Move cursor 10px right, down
         // TODO: call moveMouse(action); implement real mouse logic
         Serial.printf("[HID] Mouse: %s\n", action.c_str());
       }
