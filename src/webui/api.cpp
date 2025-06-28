@@ -4,14 +4,11 @@
 #include "../duckyscript/layout_manager.hpp"
 
 extern bool isPayloadRunning;
-
-String getKeyboardLayout() {
-  return layout_manager.getCurrentLayout();
-}
+extern LayoutManager layout_manager;
 
 String getMetricsJson() {
   return String("{") +
-         "\"cpu\": 18, \"ram\": 72, \"layout\": \"" + getKeyboardLayout() +
+         "\"cpu\": 18, \"ram\": 72, \"layout\": \"" + layout_manager.getCurrentLayout() +
          "\", \"running\": " + (isPayloadRunning ? "true" : "false") + " }";
 }
 
@@ -21,7 +18,7 @@ void init_api_routes(AsyncWebServer &server) {
   });
 
   server.on("/config", HTTP_GET, [](AsyncWebServerRequest *req) {
-    req->send(200, "application/json", "{ \"layout\": \"" + getKeyboardLayout() + "\" }");
+    req->send(200, "application/json", "{ \"layout\": \"" + layout_manager.getCurrentLayout() + "\" }");
   });
 
   server.on("/config", HTTP_POST, [](AsyncWebServerRequest *req) {}, NULL,
