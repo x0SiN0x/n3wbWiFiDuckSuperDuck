@@ -6,7 +6,7 @@
 
 fs::FS& getPayloadFS() {
     static bool sd_ok = SD.begin();
-    return sd_ok ? SD : SPIFFS;
+    return sd_ok ? (fs::FS&)SD : (fs::FS&)SPIFFS;
 }
 
 std::vector<String> list_payloads() {

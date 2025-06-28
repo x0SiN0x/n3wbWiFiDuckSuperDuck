@@ -4,6 +4,7 @@
 #include "../duckyscript/layout_manager.hpp"
 
 extern bool isPayloadRunning;
+extern LayoutManager layout_manager;
 extern String getKeyboardLayout();
 
 String getMetricsJson() {
@@ -25,7 +26,7 @@ void init_api_routes(AsyncWebServer &server) {
     [](AsyncWebServerRequest *req, uint8_t *data, size_t len, size_t, size_t) {
       String json = String((char*)data);
       int start = json.indexOf(":") + 2;
-      int end = json.lastIndexOf(""");
+      int end = json.lastIndexOf("\"");
       String layout = json.substring(start, end);
       layout_manager.setLayout(layout);
       req->send(200, "application/json", "{ \"saved\": true }");
