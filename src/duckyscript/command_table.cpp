@@ -1,3 +1,4 @@
+extern bool display_overridden;
 #include "parser.hpp"
 
 DuckyOpcode getOpcodeForLine(const String& line) {

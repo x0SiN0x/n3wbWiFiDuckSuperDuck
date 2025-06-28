@@ -1,12 +1,16 @@
 #include "display.hpp"
-// Script runner: reads a script line by line, parses, and executes
 #include "runner.hpp"
 #include "parser.hpp"
 #include "vm.hpp"
 
 #include <Arduino.h>
 
-void runScript(Stream& stream) {
+static bool display_overridden = false;
+
+void runPayload(Stream& stream) {
+    display_overridden = false;
+    showActiveScreen();
+
     String line;
     Instruction lastInstruction = { OP_UNKNOWN, "" };
 
@@ -28,4 +32,7 @@ void runScript(Stream& stream) {
             lastInstruction = instr;
         }
     }
+
+    if (!display_overridden)
+        showIdleScreen();
 }
