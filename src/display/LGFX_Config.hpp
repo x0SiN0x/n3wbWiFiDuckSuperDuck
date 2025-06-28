@@ -2,37 +2,6 @@
 #pragma once
 #include <LovyanGFX.hpp>
 
-#ifndef DISPLAY_SCLK
-#define DISPLAY_SCLK 6
-#endif
-#ifndef DISPLAY_MOSI
-#define DISPLAY_MOSI 7
-#endif
-#ifndef DISPLAY_MISO
-#define DISPLAY_MISO -1
-#endif
-#ifndef DISPLAY_CS
-#define DISPLAY_CS -1
-#endif
-#ifndef DISPLAY_DC
-#define DISPLAY_DC 4
-#endif
-#ifndef DISPLAY_RST
-#define DISPLAY_RST -1
-#endif
-#ifndef DISPLAY_LEDA
-#define DISPLAY_LEDA -1
-#endif
-#ifndef DISPLAY_BUSY
-#define DISPLAY_BUSY -1
-#endif
-#ifndef DISPLAY_WIDTH
-#define DISPLAY_WIDTH 240
-#endif
-#ifndef DISPLAY_HEIGHT
-#define DISPLAY_HEIGHT 135
-#endif
-
 class LGFX : public lgfx::LGFX_Device {
 public:
   LGFX() {
