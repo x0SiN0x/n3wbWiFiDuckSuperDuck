@@ -12,6 +12,8 @@ void setup() {
 
   // Init SPIFFS
   if (!SPIFFS.begin(true)) {
+  extern LGFX tft;
+  tft.init();
     Serial.println("❌ Failed to mount SPIFFS");
     return;
   }
