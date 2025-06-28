@@ -1,7 +1,10 @@
 
 #pragma once
 
-enum DisplayState;
+enum DisplayState {
+    DISPLAY_IDLE,
+    DISPLAY_ACTIVE
+};
 
 void updateDisplay(DisplayState state);
 void showIdleScreen();
