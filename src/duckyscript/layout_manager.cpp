@@ -28,3 +28,12 @@ String getKeyboardLayout() {
 }
 
 LayoutManager layout_manager;
+
+
+String LayoutManager::getCurrentLayout() {
+    return currentLayout;
+}
+
+void LayoutManager::setLayout(const String& layout) {
+    setKeyboardLayout(layout);
+}

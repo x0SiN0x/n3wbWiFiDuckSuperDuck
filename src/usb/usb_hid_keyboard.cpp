@@ -9,3 +9,8 @@ void send_hid_key(const char* key) {
     delay(5);
     tud_hid_keyboard_report(0, 0, NULL);
 }
+
+
+void send_hid_string(const char* str) {
+  // TODO: implement string injection
+}

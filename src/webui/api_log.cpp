@@ -1,5 +1,4 @@
-#include <ESPAsyncWebServer.h>
-#include "api.hpp"
+#include "api_log.hpp"
 
 #define LOG_BUFFER_SIZE 4096
 char logBuffer[LOG_BUFFER_SIZE];
@@ -27,7 +26,6 @@ void init_log_route(AsyncWebServer& server) {
   });
 }
 
-// Drop-in logging replacements
 void logln(const String& msg) {
   Serial.println(msg);
   logToBuffer((msg + "\n").c_str());
