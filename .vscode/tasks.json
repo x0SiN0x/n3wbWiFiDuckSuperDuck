@@ -2,12 +2,12 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "PlatformIO: Clean + Build (Errors + Warnings Only)",
+      "label": "PlatformIO: Clean + Build",
       "type": "shell",
       "command": "powershell",
       "args": [
         "-Command",
-        "pio run -t clean; pio run --silent 2>&1 | Select-String -Pattern 'error:', 'warning:'"
+        "$Timestamp = Get-Date -Format 'yyyyMMdd-HHmmss'; Compress-Archive -LiteralPath 'src' -DestinationPath release\\n3wbWiFiDuckSuperDuck_$timestamp; pio run -t clean; pio run"
       ],
       "group": {
         "kind": "build",

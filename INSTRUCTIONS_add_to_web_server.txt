@@ -1,4 +1,0 @@
-// In web_server.cpp, add:
-#include "api_log.hpp"
-// Inside start_web_server():
-init_log_route(server);
