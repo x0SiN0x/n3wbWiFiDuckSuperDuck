@@ -1,7 +1,6 @@
 #include <Arduino.h>
-#include "display/LGFX_Config.hpp"
 #include <WiFi.h>
-#include <SPIFFS.h>
+#include <LittleFS.h>
 #include <ESPAsyncWebServer.h>
 #include "webui/webui_api_backend.hpp"
 
@@ -11,16 +10,12 @@ void setup() {
   Serial.begin(115200);
   delay(500);
 
-  // Init SPIFFS
-  if (!SPIFFS.begin(true)) {
-  extern LGFX tft;
-  tft.init();
-  extern LGFX tft;
-  tft.init();
-    Serial.println("❌ Failed to mount SPIFFS");
+  // Init LittleFS
+  if (!LittleFS.begin(true)) {
+    Serial.println("❌ Failed to mount LittleFS");
     return;
   }
-  Serial.println("✅ SPIFFS mounted");
+  Serial.println("✅ LittleFS mounted");
 
   // Connect to WiFi AP mode
   WiFi.softAP(OPT_WIFI_SSID, OPT_WIFI_PASS);
@@ -29,7 +24,7 @@ void setup() {
   Serial.println(WiFi.softAPIP());
 
   // Mount static files (HTML, JS, CSS)
-  server.serveStatic("/", SPIFFS, "/").setDefaultFile("index.html");
+  server.serveStatic("/", LittleFS, "/").setDefaultFile("index.html");
 
   // Setup JSON API endpoints
   setupWebAPI();

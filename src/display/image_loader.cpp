@@ -1,5 +1,5 @@
 #include <FS.h>
-#include <SPIFFS.h>
+#include <LittleFS.h>
 #include <SD.h>
 #include "LGFX_Config.hpp"
 #include "image_loader.hpp"
@@ -7,13 +7,13 @@
 extern LGFX tft;
 
 void draw_image(LGFX& tft, const char* path) {
-    if (!SPIFFS.begin(true)) {
-        Serial.println("SPIFFS mount failed");
+    if (!LittleFS.begin(true)) {
+        Serial.println("LittleFS mount failed");
         return;
     }
 
     String file = String(path);
-    fs::FS &fs = file.startsWith("/sd/") ? (fs::FS &)SD : (fs::FS &)SPIFFS;
+    fs::FS &fs = file.startsWith("/sd/") ? (fs::FS &)SD : (fs::FS &)LittleFS;
     String shortPath = file.startsWith("/sd/") ? file.substring(3) : file;
 
     if (file.endsWith(".png")) {

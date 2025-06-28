@@ -1,12 +1,12 @@
 #include "payloads.hpp"
 #include <FS.h>
 #include <SD.h>
-#include <SPIFFS.h>
+#include <LittleFS.h>
 #include <vector>
 
 fs::FS& getPayloadFS() {
     static bool sd_ok = SD.begin();
-    return sd_ok ? (fs::FS&)SD : (fs::FS&)SPIFFS;
+    return sd_ok ? (fs::FS&)SD : (fs::FS&)LittleFS;
 }
 
 std::vector<String> list_payloads() {
