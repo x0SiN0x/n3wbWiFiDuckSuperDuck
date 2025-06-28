@@ -1,4 +1,8 @@
+
+#include <Arduino.h>
 #include "usb_hid_mouse.hpp"
-void send_mouse_move(int dx, int dy) {
-  // Stub implementation
+#include "tusb.h"
+
+void moveMouse(int x, int y, int wheel) {
+    tud_hid_mouse_report(0, 0, x, y, wheel);
 }
