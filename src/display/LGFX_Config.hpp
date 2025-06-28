@@ -55,6 +55,8 @@ public:
       bus->config(cfg);
     }
 
+    panel->setBus(bus);  // ✅ correctly assign the SPI bus to the panel
+
     {
       auto cfg = panel->config();
       cfg.pin_cs = DISPLAY_CS;
@@ -68,6 +70,5 @@ public:
     }
 
     this->setPanel(panel);
-    this->setBus(bus);
   }
 };
