@@ -6,7 +6,6 @@ class LGFX : public lgfx::LGFX_Device {
 public:
   LGFX() {
     auto bus = new lgfx::Bus_SPI();
-    auto panel = new lgfx::Panel_ST7789();
 
     {
       auto cfg = bus->config();
@@ -20,18 +19,31 @@ public:
       cfg.pin_sclk = DISPLAY_SCLK;
       cfg.pin_mosi = DISPLAY_MOSI;
       cfg.pin_miso = DISPLAY_MISO;
-      cfg.pin_dc = DISPLAY_DC;
+      cfg.pin_dc   = DISPLAY_DC;
       bus->config(cfg);
     }
 
-    panel->setBus(bus);  // ✅ correctly assign the SPI bus to the panel
+    // ----- Panel selection based on build flag -----
+    lgfx::Panel_Device* panel = nullptr;
+
+    #if defined(TFT_PANEL_ST7735)
+      panel = new lgfx::Panel_ST7735();
+    #elif defined(TFT_PANEL_ST7789)
+      panel = new lgfx::Panel_ST7789();
+    #elif defined(TFT_PANEL_ILI9341)
+      panel = new lgfx::Panel_ILI9341();
+    #else
+      #error "No valid TFT panel defined! Use -DTFT_PANEL_ST7789 or -DTFT_PANEL_ILI9341"
+    #endif
+
+    panel->setBus(bus);
 
     {
       auto cfg = panel->config();
-      cfg.pin_cs = DISPLAY_CS;
-      cfg.pin_rst = DISPLAY_RST;
+      cfg.pin_cs   = DISPLAY_CS;
+      cfg.pin_rst  = DISPLAY_RST;
       cfg.pin_busy = DISPLAY_BUSY;
-      cfg.panel_width = DISPLAY_WIDTH;
+      cfg.panel_width  = DISPLAY_WIDTH;
       cfg.panel_height = DISPLAY_HEIGHT;
       cfg.offset_x = 0;
       cfg.offset_y = 0;
