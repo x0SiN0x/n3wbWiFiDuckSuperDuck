@@ -1,1 +1,3 @@
-# n3wbWiFiDuckSuperDuck
+# n3wb WiFiDuckSuperDuck
+
+A fully modular, open-source USB HID injection platform built for ESP32-S3/S2 microcontrollers. Supports DuckyScript v1, v2, v3, and custom v3+ extensions. ...
