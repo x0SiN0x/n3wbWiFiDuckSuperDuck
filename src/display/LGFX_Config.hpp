@@ -14,7 +14,8 @@ public:
             // cfg.pin_cs removed for LovyanGFX v1.x compatibility
             bus->config(cfg);
         }
-        this->setBus(&bus);
+        panel.setBus(&bus);
+        this->setPanel(&panel);
 
         auto panel = new lgfx::Panel_ST7735S();
         {
