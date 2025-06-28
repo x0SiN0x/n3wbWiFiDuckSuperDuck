@@ -1,9 +1,10 @@
-// Display control: handles idle/status image switching
 #include "LGFX_Config.hpp"
 #include "image_loader.hpp"
 
-static LGFX tft;
-static bool isPayloadRunning = false;
+extern LGFX tft;
+
+void display_idle();
+void display_payload_active();
 
 void display_init() {
     tft.init();
@@ -12,11 +13,9 @@ void display_init() {
 }
 
 void display_idle() {
-    isPayloadRunning = false;
     draw_image(tft, "/n3wb_main.png");
 }
 
 void display_payload_active() {
-    isPayloadRunning = true;
     draw_image(tft, "/n3wb_main_evil.png");
 }

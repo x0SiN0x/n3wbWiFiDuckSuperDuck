@@ -7,11 +7,11 @@ public:
         auto bus = new lgfx::Bus_SPI();
         {
             auto cfg = bus->config();
-            cfg.spi_host = VSPI_HOST;
+            cfg.spi_host = SPI3_HOST;
             cfg.pin_sclk = DISPLAY_SCLK;
             cfg.pin_mosi = DISPLAY_MOSI;
             cfg.pin_miso = DISPLAY_MISO;
-            cfg.pin_ss = DISPLAY_CS;
+            cfg.pin_cs = DISPLAY_CS;
             bus->config(cfg);
         }
         this->setBus(bus);
@@ -22,7 +22,6 @@ public:
             cfg.pin_cs = DISPLAY_CS;
             cfg.pin_rst = DISPLAY_RST;
             cfg.pin_busy = DISPLAY_BUSY;
-            cfg.pin_dc = DISPLAY_DC;
             cfg.memory_width = DISPLAY_WIDTH;
             cfg.memory_height = DISPLAY_HEIGHT;
             cfg.panel_width = TFT_WIDTH;
