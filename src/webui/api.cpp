@@ -1,34 +1,32 @@
-#include <ESPAsyncWebServer.h>
+
 #include "api.hpp"
-#include "../storage/payloads.hpp"
-#include "../duckyscript/layout_manager.hpp"
+#include "api_log.hpp"
+#include "api_live.hpp"
+#include <Arduino.h>
+#include <WebServer.h>
 
-extern bool isPayloadRunning;
-extern LayoutManager layout_manager;
+WebServer server(80);
 
-String getMetricsJson() {
-  return String("{") +
-         "\"cpu\": 18, \"ram\": 72, \"layout\": \"" + layout_manager.getCurrentLayout() +
-         "\", \"running\": " + (isPayloadRunning ? "true" : "false") + " }";
-}
+void setupWebAPI() {
+    Serial.println("[WebAPI] Registering routes");
 
-void init_api_routes(AsyncWebServer &server) {
-  server.on("/status", HTTP_GET, [](AsyncWebServerRequest *req) {
-    req->send(200, "application/json", getMetricsJson());
-  });
+    server.on("/status", HTTP_GET, []() {
+        server.send(200, "application/json", R"({"status": "ok"})");
+    });
 
-  server.on("/config", HTTP_GET, [](AsyncWebServerRequest *req) {
-    req->send(200, "application/json", "{ \"layout\": \"" + layout_manager.getCurrentLayout() + "\" }");
-  });
+    server.on("/payloads", HTTP_GET, []() {
+        // In a real build this would list payloads from internal flash or SD
+        server.send(200, "application/json", R"(["hello.txt","evil.txt"])");
+    });
 
-  server.on("/config", HTTP_POST, [](AsyncWebServerRequest *req) {}, NULL,
-    [](AsyncWebServerRequest *req, uint8_t *data, size_t len, size_t, size_t) {
-      String json = String((const char*)data, len);
-      int start = json.indexOf(":") + 2;
-      int end = json.lastIndexOf("\"");
-      String layout = json.substring(start, end);
-      layout_manager.setLayout(layout);
-      req->send(200, "application/json", "{ \"saved\": true }");
-    }
-  );
+    server.on("/run", HTTP_POST, []() {
+        String body = server.arg("plain");
+        Serial.println("[WebAPI] Running payload:
+" + body);
+        // TODO: parse/execute payload here
+        server.send(200, "application/json", R"({"status": "started"})");
+    });
+
+    server.begin();
+    Serial.println("[WebAPI] Server started on port 80");
 }
