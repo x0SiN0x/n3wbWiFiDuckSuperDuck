@@ -7,7 +7,13 @@
 AsyncWebServer server(80);
 
 void start_web_server() {
-  WiFi.softAP("n3wbDuck", "newbpass");
+  if (!SPIFFS.begin(true)) {
+    Serial.println("[SPIFFS] Mount failed");
+    return;
+  } else {
+    Serial.println("[SPIFFS] Mounted");
+  }
+
 
   init_api_routes(server);
   init_live_routes(server);

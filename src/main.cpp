@@ -9,7 +9,16 @@
 extern LGFX tft;
 
 void setup() {
-  esp_task_wdt_deinit();
+  // Correct WDT config for ESP-IDF 5+
+  esp_task_wdt_config_t wdt_config = {
+    .timeout_ms = 10000,  // 10 seconds
+    .idle_core_mask = (1 << portNUM_PROCESSORS) - 1,
+    .trigger_panic = false
+  };
+  if (esp_task_wdt_status(NULL) == ESP_ERR_NOT_FOUND) {
+    esp_task_wdt_init(&wdt_config);
+  }
+  esp_task_wdt_add(NULL);  // register current task
 
   Serial.begin(115200);
   delay(1000);
@@ -28,8 +37,13 @@ void setup() {
 
   start_web_server();
   logln("[WEB] Web server started");
+
+  tft.setTextSize(2);
+  tft.setTextColor(TFT_RED);
+  tft.drawString("TEST SCREEN", 10, 30);
 }
 
 void loop() {
+  esp_task_wdt_reset();
   delay(100);
 }
