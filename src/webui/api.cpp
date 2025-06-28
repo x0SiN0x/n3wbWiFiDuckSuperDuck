@@ -1,6 +1,7 @@
 #include <ESPAsyncWebServer.h>
 #include "api.hpp"
 #include "../storage/payloads.hpp"
+#include "../duckyscript/layout_manager.hpp"
 
 extern bool isPayloadRunning;
 extern String getKeyboardLayout();
@@ -17,10 +18,17 @@ void init_api_routes(AsyncWebServer &server) {
   });
 
   server.on("/config", HTTP_GET, [](AsyncWebServerRequest *req) {
-    req->send(200, "application/json", "{ \"layout\": \"US\", \"default_delay\": 5 }");
+    req->send(200, "application/json", "{ \"layout\": \"" + getKeyboardLayout() + "\" }");
   });
 
-  server.on("/config", HTTP_POST, [](AsyncWebServerRequest *req) {
-    req->send(200, "application/json", "{ \"saved\": true }");
-  });
+  server.on("/config", HTTP_POST, [](AsyncWebServerRequest *req) {}, NULL,
+    [](AsyncWebServerRequest *req, uint8_t *data, size_t len, size_t, size_t) {
+      String json = String((char*)data);
+      int start = json.indexOf(":") + 2;
+      int end = json.lastIndexOf(""");
+      String layout = json.substring(start, end);
+      layout_manager.setLayout(layout);
+      req->send(200, "application/json", "{ \"saved\": true }");
+    }
+  );
 }

@@ -1,6 +1,9 @@
 #include "parser.hpp"
 #include "vm.hpp"
 #include "usb_composite.hpp"
+#include "../display/image_loader.hpp"
+
+extern LGFX tft;
 
 bool attack_hid = true;
 bool attack_storage = true;
@@ -22,5 +25,13 @@ void executeInstruction(const Instruction& instr) {
         return;
     }
 
-    // Other instruction handling here...
+    if (instr.opcode == OP_RUN) {
+        draw_image(tft, "/n3wb_main_evil.png");
+    }
+
+    if (instr.opcode == OP_END) {
+        draw_image(tft, "/n3wb_main.png");
+    }
+
+    // Handle other instructions
 }

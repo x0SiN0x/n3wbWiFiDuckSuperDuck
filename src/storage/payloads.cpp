@@ -1,12 +1,18 @@
-// Handles .ds payload file discovery and loading
 #include "payloads.hpp"
 #include <FS.h>
 #include <SD.h>
+#include <SPIFFS.h>
 #include <vector>
+
+fs::FS& getPayloadFS() {
+    static bool sd_ok = SD.begin();
+    return sd_ok ? SD : SPIFFS;
+}
 
 std::vector<String> list_payloads() {
     std::vector<String> payloads;
-    File dir = SD.open("/payloads");
+    fs::FS &fs = getPayloadFS();
+    File dir = fs.open("/payloads");
 
     if (!dir || !dir.isDirectory()) return payloads;
 
@@ -23,6 +29,5 @@ std::vector<String> list_payloads() {
 }
 
 File open_payload(const String& name) {
-    String path = "/payloads/" + name;
-    return SD.open(path, FILE_READ);
+    return getPayloadFS().open("/payloads/" + name, FILE_READ);
 }

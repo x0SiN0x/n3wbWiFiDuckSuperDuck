@@ -1,1 +1,22 @@
-<!-- Finalized config.html -->
+<!DOCTYPE html>
+<html><body>
+  <h3>Keyboard Layout</h3>
+  <select id="layout">
+    <option value="US">US</option>
+    <option value="UK">UK</option>
+    <option value="DE">DE</option>
+    <option value="FR">FR</option>
+  </select>
+  <button onclick="saveLayout()">Save</button>
+  <script>
+    async function saveLayout() {
+      const layout = document.getElementById('layout').value;
+      await fetch('/config', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({layout})
+      });
+      alert('Saved');
+    }
+  </script>
+</body></html>
