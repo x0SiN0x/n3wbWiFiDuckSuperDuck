@@ -1,4 +1,5 @@
 #include <Arduino.h>
+#include "display/LGFX_Config.hpp"
 #include <WiFi.h>
 #include <SPIFFS.h>
 #include <ESPAsyncWebServer.h>
@@ -12,6 +13,8 @@ void setup() {
 
   // Init SPIFFS
   if (!SPIFFS.begin(true)) {
+  extern LGFX tft;
+  tft.init();
   extern LGFX tft;
   tft.init();
     Serial.println("❌ Failed to mount SPIFFS");
