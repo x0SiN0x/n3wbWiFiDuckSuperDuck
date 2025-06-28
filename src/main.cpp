@@ -1,16 +1,14 @@
-
 #include <Arduino.h>
-#include <LovyanGFX.hpp>
+#include "display.hpp"      // ✅ Fix: ensures showIdleScreen() is declared
 #include "display/LGFX_Config.hpp"
+
+extern LGFX tft;
 
 void setup() {
   Serial.begin(115200);
-  extern LGFX tft;
-  tft.init();
+  tft.begin();              // ✅ Preferred over tft.init() for full panel init
   tft.setBrightness(255);
-  showIdleScreen();
-  tft.fillScreen(TFT_RED); // TEMP: test panel response
-  delay(1000);
+  showIdleScreen();         // ✅ Show boot image
 }
 
 void loop() {
