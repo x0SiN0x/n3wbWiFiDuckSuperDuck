@@ -1,7 +1,4 @@
-// SD card initialization (SPI or SD_MMC)
-#include "sd_card.hpp"
-#include <SD.h>
-#include <SPI.h>
+#include <SD_MMC.h>
 
 bool sd_init() {
 #if defined(USE_SD_MMC_INTERFACE)

@@ -1,18 +1,15 @@
-// Composite USB descriptor and class registration
-#include "usb_descriptors.h"
-#include "tusb.h"
 #include "usb_composite.hpp"
+#include "tusb.h"
+#include "../storage/msc.hpp"
 
 void usb_init_composite(bool enable_hid, bool enable_storage) {
     tusb_init();
 
     if (enable_hid) {
-        // HID driver (keyboard/mouse/media)
-        tud_hid_set_report_cb(hid_report_callback);
+        // tud_hid_set_report_cb(hid_report_callback); // define callback later if needed
     }
 
     if (enable_storage) {
-        // MSC driver initialized via msc.cpp
         storage_mount_msc_luns();
     }
 }

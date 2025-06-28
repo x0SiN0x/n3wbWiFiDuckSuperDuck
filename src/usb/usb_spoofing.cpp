@@ -1,4 +1,4 @@
-// Runtime spoofing (stub for now)
+#include <Arduino.h>
 #include "usb_descriptors.h"
 
 uint16_t get_usb_vid() {

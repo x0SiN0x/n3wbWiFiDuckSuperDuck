@@ -1,5 +1,6 @@
 #include <FS.h>
 #include <SPIFFS.h>
+#include <SD.h>
 #include "LGFX_Config.hpp"
 #include "image_loader.hpp"
 
@@ -16,8 +17,8 @@ void draw_image(LGFX& tft, const char* path) {
     String shortPath = file.startsWith("/sd/") ? file.substring(3) : file;
 
     if (file.endsWith(".png")) {
-        tft.drawPngFile(fs, shortPath.c_str());
+        tft.drawPngFile(shortPath.c_str());
     } else if (file.endsWith(".jpg") || file.endsWith(".jpeg")) {
-        tft.drawJpgFile(fs, shortPath.c_str());
+        tft.drawJpgFile(shortPath.c_str());
     }
 }
