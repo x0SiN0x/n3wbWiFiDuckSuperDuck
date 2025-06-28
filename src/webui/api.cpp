@@ -5,7 +5,10 @@
 
 extern bool isPayloadRunning;
 extern LayoutManager layout_manager;
-extern String getKeyboardLayout();
+
+String getKeyboardLayout() {
+  return layout_manager.getCurrentLayout();
+}
 
 String getMetricsJson() {
   return String("{") +

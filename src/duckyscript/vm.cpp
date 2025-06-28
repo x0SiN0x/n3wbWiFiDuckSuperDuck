@@ -2,6 +2,7 @@
 #include "vm.hpp"
 #include "../usb/usb_composite.hpp"
 #include "../display/image_loader.hpp"
+#include "../display/LGFX_Config.hpp"
 
 extern LGFX tft;
 
@@ -25,11 +26,5 @@ void executeInstruction(const Instruction& instr) {
         return;
     }
 
-    if (instr.opcode == OP_RUN) {
-        draw_image(tft, "/n3wb_main_evil.png");
-    }
-
-    if (instr.opcode == OP_END) {
-        draw_image(tft, "/n3wb_main.png");
-    }
+    // Normal instruction handling...
 }
