@@ -70,7 +70,7 @@ void setupWebAPI() {
       DeserializationError err = deserializeJson(doc, data);
       if (!err && doc.containsKey("key")) {
         String key = doc["key"].as<String>();
-    sendKey(KEY_ENTER); // Dummy key
+    sendKey(HID_KEY_ENTER); // Dummy key
         // TODO: call sendKey(key); implement real HID logic
         Serial.printf("[HID] Key: %s\n", key.c_str());
       }
