@@ -4,13 +4,7 @@
 #include "images/n3wb_main_evil_img.hpp"
 #include <Arduino.h>
 
-// Placeholder for the actual draw function connected to TFT
 extern void drawRGB565Image(const uint16_t *img, int width, int height);
-
-enum DisplayState {
-    DISPLAY_IDLE,
-    DISPLAY_ACTIVE
-};
 
 static DisplayState current_state = DISPLAY_IDLE;
 

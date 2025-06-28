@@ -1,5 +1,7 @@
 
+#include <Arduino.h>
 #include <string>
+#include "tusb.h"
 #include "usb_hid_keyboard.hpp"
 
 void injectString(const std::string& text) {
