@@ -6,7 +6,7 @@
 #include "display/LGFX_Config.hpp"
 #endif
 
-#include "web/web_server.hpp"
+#include "webui/web_server.hpp"
 #include "duckyscript/duckyscript_engine.hpp"
 #include "hid/hid_executor.hpp"
 #include "usb/usb_config.hpp"
