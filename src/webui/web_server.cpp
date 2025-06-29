@@ -5,7 +5,7 @@
 #include "api_live.hpp"
 #include "webui_api_backend.hpp"
 
-void start_web_server() {
+void startWebServer() {
   if (!LittleFS.begin(true)) {
     Serial.println("[LittleFS] Mount failed");
     return;
