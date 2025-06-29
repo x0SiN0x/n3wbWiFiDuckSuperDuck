@@ -28,25 +28,3 @@ Instruction parseLine(const String& line) {
 
     return { op, arg };
 }
-
-ParseResult DuckyParser::parse(const std::string& script) {
-    ParseResult result{true, ""};
-    String src(script.c_str());
-    int idx = 0;
-    while (idx < src.length()) {
-        int newline = src.indexOf('\n', idx);
-        if (newline < 0) newline = src.length();
-        String line = src.substring(idx, newline);
-        line.trim();
-        if (!line.isEmpty()) {
-            Instruction instr = parseLine(line);
-            if (instr.opcode == OP_UNKNOWN) {
-                result.success = false;
-                result.error = String("Unknown command: ") + line;
-                break;
-            }
-        }
-        idx = newline + 1;
-    }
-    return result;
-}

@@ -19,15 +19,5 @@ struct Instruction {
     String argument;
 };
 
-struct ParseResult {
-    bool success;
-    String error;
-};
-
-class DuckyParser {
-public:
-    ParseResult parse(const std::string& script);
-};
-
 extern DuckyScriptVersion currentVersion;
 Instruction parseLine(const String& line);
