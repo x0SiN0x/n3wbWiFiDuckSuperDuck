@@ -1,4 +1,4 @@
-
+// File: src/main.cpp
 #include <Arduino.h>
 
 #ifdef HAS_TFT
@@ -6,11 +6,21 @@
 #include "display/LGFX_Config.hpp"
 #endif
 
-#include "webui/web_server.hpp"
-#include "duckyscript/duckyscript_engine.hpp"
-#include "hid/hid_executor.hpp"
+#ifdef HAS_USB
 #include "usb/usb_config.hpp"
-#include "storage/storage_manager.hpp"
+#endif
+
+#ifdef HAS_SD
+#include "storage/sd_card.hpp"
+#endif
+
+#ifdef HAS_BT
+#include "bt/bt_passthrough.hpp"
+#endif
+
+#include "config/config_manager.hpp"
+#include "web/web_server.hpp"
+#include "duckyscript/duckyscript_engine.hpp"
 
 extern LGFX tft;
 
@@ -18,27 +28,38 @@ void setup() {
   Serial.begin(115200);
 
 #ifdef HAS_TFT
-  tft.begin();
-  tft.setBrightness(255);
-  showIdleScreen();  // shows n3wb_main.png
+  if (ConfigManager::get().tft_enabled) {
+    tft.begin();
+    tft.setBrightness(ConfigManager::get().tft_brightness);
+    showIdleScreen();
+  }
 #endif
 
-  // Initialize USB stack (HID, Storage, etc.)
-  initUSB();
+#ifdef HAS_USB
+  initUSB(); // checks NVS config for HID + MSC
+#endif
 
-  // Mount internal storage (SPIFFS) or SD card if present
-  initStorage();
+  initStorage();  // SPIFFS or SD
 
-  // Start the WebUI server
-  startWebServer();
+#ifdef HAS_BT
+  if (ConfigManager::get().bt_enabled) {
+    if (ConfigManager::get().bt_mode == "passthrough") {
+      startBluetoothPassthrough();
+    } else {
+      startBluetoothHID();
+    }
+  }
+#endif
 
-  // Initialize Duckyscript system runtime context
-  duckyscript::init();
+  ConfigManager::load(); // load NVS
+  startWebServer(); // WebUI
+  duckyscript::init();  // Runtime environment
 
-  // Optionally: load saved config or script defaults from NVS (not yet implemented)
+  if (ConfigManager::get().autorun_enabled) {
+    duckyscript::runFile(ConfigManager::get().autorun_payload_path.c_str());
+  }
 }
 
 void loop() {
-  // Background handling if needed
-  handleWebRequests();  // typically runs in async loop
+  handleWebRequests();  // optional async loop
 }

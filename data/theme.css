@@ -1,0 +1,6 @@
+// File: data/theme.css
+:root {
+  --bg: #000;
+  --fg: #0f0;
+}
+body { background-color: var(--bg); color: var(--fg); font-family: monospace; }

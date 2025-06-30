@@ -1,0 +1,26 @@
+// File: data/config.html
+<!DOCTYPE html>
+<html>
+<head><link rel="stylesheet" href="/theme.css"></head>
+<body>
+  <h2>Device Configuration</h2>
+  <form id="cfg-form">
+    Layout: <input name="layout" value="us"><br>
+    Default Delay: <input name="default_delay" value="50"><br>
+    Autorun Payload Path: <input name="autorun_payload_path" value="/payloads/auto.ds"><br>
+    <button type="submit">Save</button>
+  </form>
+  <script>
+    document.getElementById('cfg-form').onsubmit = async (e) => {
+      e.preventDefault();
+      const fd = new FormData(e.target);
+      const data = Object.fromEntries(fd.entries());
+      await fetch('/api/config', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+    };
+  </script>
+</body>
+</html>
